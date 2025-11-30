@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.ifsp.Leel.Model.Cliente;
+import com.ifsp.Leel.Model.Pessoa;
 import com.ifsp.Leel.Model.Vendedor;
 import com.ifsp.Leel.Repository.ClienteRepository;
+import com.ifsp.Leel.Repository.PessoaRepository;
 import com.ifsp.Leel.Repository.VendedorRepository;
 import jakarta.servlet.http.HttpSession;
 
@@ -21,6 +23,9 @@ public class LoginController {
 
     @Autowired
     private VendedorRepository vendedorRepository;
+
+    @Autowired
+    private PessoaRepository pessoaRepository; // Novo repositório unificado
 
     @GetMapping("/loja")
     public String loja() {
@@ -36,7 +41,6 @@ public class LoginController {
                 return "redirect:/meus-produtos";
             }
         }
-
         return "cadastroLogin.html";
     }
 
@@ -44,33 +48,31 @@ public class LoginController {
     public String processarLogin(@RequestParam String nome, @RequestParam String senha,
             Model model, HttpSession session) {
 
-        Cliente cliente = clienteRepository.findByNomeAndSenha(nome, senha);
-        if (cliente != null) {
-            session.setAttribute("usuarioLogado", cliente);
-            session.setAttribute("tipoUsuario", "CLIENTE");
-            session.setAttribute("usuarioNome", cliente.getNome());
+        // SOLUÇÃO DA REDUNDÂNCIA: Busca uma única vez na tabela Pessoa
+        Pessoa pessoa = pessoaRepository.findByNomeAndSenha(nome, senha);
 
-            return "redirect:/loja";
-        }
-
-        Vendedor vendedor = vendedorRepository.findByNomeAndSenha(nome, senha);
-        if (vendedor != null) {
-            session.setAttribute("usuarioLogado", vendedor);
-            session.setAttribute("tipoUsuario", "VENDEDOR");
-            session.setAttribute("usuarioNome", vendedor.getNome());
-
-            return "redirect:/meus-produtos";
+        if (pessoa != null) {
+            // Verifica qual o tipo real do usuário (Polimorfismo)
+            if (pessoa instanceof Cliente) {
+                session.setAttribute("usuarioLogado", pessoa);
+                session.setAttribute("tipoUsuario", "CLIENTE");
+                session.setAttribute("usuarioNome", pessoa.getNome());
+                return "redirect:/loja";
+            } else if (pessoa instanceof Vendedor) {
+                session.setAttribute("usuarioLogado", pessoa);
+                session.setAttribute("tipoUsuario", "VENDEDOR");
+                session.setAttribute("usuarioNome", pessoa.getNome());
+                return "redirect:/meus-produtos";
+            }
         }
 
         model.addAttribute("erro", "Usuário ou senha inválidos");
-
         return "cadastroLogin";
     }
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
-
         return "redirect:/login";
     }
 
@@ -82,7 +84,6 @@ public class LoginController {
             model.addAttribute("erroCadastro", "Erro ao cadastrar cliente.");
             return "cadastroLogin";
         }
-
         return "redirect:/login";
     }
 
@@ -91,18 +92,20 @@ public class LoginController {
         Object usuarioLogado = session.getAttribute("usuarioLogado");
         String tipoUsuario = (String) session.getAttribute("tipoUsuario");
 
-        if (usuarioLogado == null) {
+        if (usuarioLogado == null)
             return "redirect:/login";
-        }
 
+        // Usamos findById com .orElse(null) pois agora é JpaRepository
         if ("CLIENTE".equals(tipoUsuario)) {
-            model.addAttribute("cliente", (Cliente) usuarioLogado);
+            Cliente c = (Cliente) usuarioLogado;
+            model.addAttribute("cliente", clienteRepository.findById(c.getId()).orElse(null));
             model.addAttribute("tipoUsuario", "CLIENTE");
             return "painelUsuario.html";
         }
 
         if ("VENDEDOR".equals(tipoUsuario)) {
-            model.addAttribute("vendedor", (Vendedor) usuarioLogado);
+            Vendedor v = (Vendedor) usuarioLogado;
+            model.addAttribute("vendedor", vendedorRepository.findById(v.getId()).orElse(null));
             model.addAttribute("tipoUsuario", "VENDEDOR");
             return "painelUsuario.html";
         }
@@ -112,16 +115,13 @@ public class LoginController {
 
     @PostMapping("/meu-perfil/cliente")
     public String atualizarPerfilCliente(Cliente formData, HttpSession session, RedirectAttributes redirectAttributes) {
-
         Cliente clienteLogado = (Cliente) session.getAttribute("usuarioLogado");
-        if (clienteLogado == null || !"CLIENTE".equals(session.getAttribute("tipoUsuario"))) {
+        if (clienteLogado == null || !"CLIENTE".equals(session.getAttribute("tipoUsuario")))
             return "redirect:/login";
-        }
 
-        Cliente clienteDB = clienteRepository.findById((long) clienteLogado.getId());
-        if (clienteDB == null) {
+        Cliente clienteDB = clienteRepository.findById(clienteLogado.getId()).orElse(null);
+        if (clienteDB == null)
             return "redirect:/login";
-        }
 
         clienteDB.setNome(formData.getNome());
         clienteDB.setEmail(formData.getEmail());
@@ -132,14 +132,13 @@ public class LoginController {
         }
 
         try {
-            clienteRepository.update(clienteDB);
+            clienteRepository.save(clienteDB); // 'save' substitui 'update'
             session.setAttribute("usuarioLogado", clienteDB);
             redirectAttributes.addFlashAttribute("sucesso", "Perfil atualizado!");
         } catch (Exception e) {
             e.printStackTrace();
             redirectAttributes.addFlashAttribute("erro", "Falha ao atualizar o perfil.");
         }
-
         return "redirect:/meu-perfil";
     }
 
@@ -148,17 +147,15 @@ public class LoginController {
         Object usuarioLogado = session.getAttribute("usuarioLogado");
         String tipoUsuario = (String) session.getAttribute("tipoUsuario");
 
-        if (usuarioLogado == null) {
+        if (usuarioLogado == null)
             return "redirect:/login";
-        }
 
         try {
             if ("CLIENTE".equals(tipoUsuario)) {
-                Cliente cliente = (Cliente) usuarioLogado;
-                clienteRepository.delete((long) cliente.getId());
+                // 'deleteById' substitui 'delete'
+                clienteRepository.deleteById(((Cliente) usuarioLogado).getId());
             } else if ("VENDEDOR".equals(tipoUsuario)) {
-                Vendedor vendedor = (Vendedor) usuarioLogado;
-                vendedorRepository.delete((long) vendedor.getId());
+                vendedorRepository.deleteById(((Vendedor) usuarioLogado).getId());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -168,7 +165,6 @@ public class LoginController {
 
         session.invalidate();
         redirectAttributes.addFlashAttribute("sucesso", "Conta deletada com sucesso.");
-
         return "redirect:/login";
     }
-}
+}   

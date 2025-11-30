@@ -19,14 +19,13 @@ public class VendedorController {
     @GetMapping("/cadastrarVendedor")
     public String mostrarFormularioCadastroVendedor(Model model) {
         model.addAttribute("vendedor", new Vendedor());
-
         return "cadastroVendedor.html";
     }
 
     @PostMapping("/cadastrarVendedor")
     public String cadastrarVendedor(Vendedor vendedor, Model model, RedirectAttributes redirectAttributes) {
         try {
-            vendedorRepository.save(vendedor);
+            vendedorRepository.save(vendedor); // 'save' substitui o código manual
         } catch (Exception e) {
             e.printStackTrace();
             model.addAttribute("erro", "Falha ao cadastrar o vendedor.");
@@ -44,13 +43,13 @@ public class VendedorController {
 
         Vendedor vendedorLogado = (Vendedor) session.getAttribute("usuarioLogado");
         if (vendedorLogado == null || !"VENDEDOR".equals(session.getAttribute("tipoUsuario"))) {
-
             return "redirect:/login";
         }
 
-        Vendedor vendedorDB = vendedorRepository.findById((long) vendedorLogado.getId());
-        if (vendedorDB == null) {
+        // 'findById' agora retorna um Optional, usamos orElse(null)
+        Vendedor vendedorDB = vendedorRepository.findById((long) vendedorLogado.getId()).orElse(null);
 
+        if (vendedorDB == null) {
             return "redirect:/login";
         }
 
@@ -63,7 +62,7 @@ public class VendedorController {
         }
 
         try {
-            vendedorRepository.update(vendedorDB);
+            vendedorRepository.save(vendedorDB); // CORREÇÃO: Usamos 'save' em vez de 'update'
             session.setAttribute("usuarioLogado", vendedorDB);
             redirectAttributes.addFlashAttribute("sucesso", "Perfil atualizado!");
         } catch (Exception e) {
