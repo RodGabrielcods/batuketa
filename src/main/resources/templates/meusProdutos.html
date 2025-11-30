@@ -3,9 +3,11 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Meus Produtos - Batuketa</title>
+
     <link rel="stylesheet" th:href="@{/css/styles.css}">
     <link rel="stylesheet" th:href="@{/css/painelVendedor.css}">
+
+    <title>Meus Produtos - Batuketa</title>
 </head>
 
 <body>
@@ -46,6 +48,7 @@
                             <th>Ações</th>
                         </tr>
                     </thead>
+
                     <tbody>
                         <tr th:each="produto : ${produtos}">
                             <td>

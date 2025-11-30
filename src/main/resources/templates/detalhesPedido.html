@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalhes do Pedido</title>
 
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/pedidos.css">
+
+    <title>Detalhes do Pedido</title>
 </head>
 
 <body>
-
     <header>
         <div class="nav-bar">
             <div id="nav-logo">BATUKETA</div>
@@ -31,6 +31,7 @@
                     <span th:text="${#temporals.format(pedido.dataPedido, 'dd/MM/yyyy HH:mm')}"></span>
                 </div>
             </div>
+
             <div style="text-align: right;">
                 <span class="status-badge" th:classappend="'status-' + ${pedido.status.split(' ')[0]}"
                     th:text="${pedido.status}"></span>
@@ -41,6 +42,7 @@
             <span class="info-label">Cliente:</span>
             <span th:text="${pedido.cliente.nome}"></span>
         </div>
+
         <div class="info-grupo">
             <span class="info-label">Email:</span>
             <span th:text="${pedido.cliente.email}"></span>
@@ -80,7 +82,6 @@
             </form>
         </div>
     </div>
-
 </body>
 
 </html>

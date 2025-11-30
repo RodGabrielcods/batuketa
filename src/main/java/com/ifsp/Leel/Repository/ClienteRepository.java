@@ -1,11 +1,8 @@
 package com.ifsp.Leel.Repository;
 
 import java.util.List;
-
 import org.springframework.stereotype.Repository;
-
 import com.ifsp.Leel.Model.Cliente;
-
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;

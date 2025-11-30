@@ -3,40 +3,34 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Seu Carrinho</title>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="/css/cart.css">
     <link rel="stylesheet" href="/css/header.css">
     <link rel="stylesheet" th:href="@{/css/styles.css}">
     <link rel="icon" type="image/png" href="/img/logozin.png">
+
+    <title>Seu Carrinho</title>
 </head>
 
 <body>
-
     <header>
         <nav class="nav-bar">
             <a href="/"><i class="fas fa-headphones" id="nav-logo"> B A T U K E T A</i></a>
 
             <div class="nav-actions">
-
-                <a th:unless="${session.usuarioLogado}" href="/login" class="nav-icon">
-                    <i class='bx bx-user'></i> </a>
-
-                <a th:if="${session.usuarioLogado}" href="/meu-perfil" class="nav-icon">
-                    <i class='bx bxs-user-circle'></i> </a>
-
-                <a href="/carrinho" class="nav-icon">
-                    <i class='bx bx-cart'></i>
+                <a th:unless="${session.usuarioLogado}" href="/login" class="nav-icon"><i class='bx bx-user'></i></a>
+                <a th:if="${session.usuarioLogado}" href="/meu-perfil" class="nav-icon"><i
+                        class='bx bxs-user-circle'></i></a>
+                <a href="/carrinho" class="nav-icon"><i class='bx bx-cart'></i>
                 </a>
-
-                <a th:if="${session.usuarioLogado}" href="/logout" class="nav-icon">
-                    <i class='bx bx-log-out'></i> </a>
+                <a th:if="${session.usuarioLogado}" href="/logout" class="nav-icon"><i class='bx bx-log-out'></i></a>
             </div>
+
             <button class="mobile-btn">
                 <i class="fa-solid fa-bars"></i>
             </button>
         </nav>
-
 
         <div class="mobile-menu">
             <ul class="mobile-nav-list">
@@ -63,7 +57,8 @@
 
         <div th:if="${erro}"
             style="background-color: #f8d7da; color: #721c24; padding: 10px; margin-bottom: 15px; border-radius: 5px;"
-            th:text="${erro}"></div>
+            th:text="${erro}">
+        </div>
 
         <div th:if="${#lists.isEmpty(itens)}">
             <p>Seu carrinho está vazio.</p>
@@ -79,6 +74,7 @@
                 <label>
                     <input type="checkbox" name="on" th:checked="${persistent}"> Lembrar carrinho por 7 dias
                 </label>
+
                 <button type="submit" class="btn-default">Salvar</button>
             </form>
 
@@ -91,6 +87,7 @@
                         <th>Total</th>
                     </tr>
                 </thead>
+
                 <tbody>
                     <tr th:each="item : ${itens}">
                         <td style="display: flex; align-items: center; gap: 15px;">
@@ -150,7 +147,6 @@
             </div>
         </div>
     </div>
-
 </body>
 
-</html> 
+</html>

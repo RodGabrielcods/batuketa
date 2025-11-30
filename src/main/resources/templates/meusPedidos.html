@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meus Pedidos - Leel</title>
 
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/pedidos.css">
+
+    <title>Meus Pedidos - Leel</title>
 </head>
 
 <body>
-
     <header>
         <div class="nav-bar">
             <div id="nav-logo">BATUKETA</div>
@@ -29,10 +29,13 @@
 
         <div th:if="${sucesso}"
             style="background-color: #d4edda; color: #155724; padding: 10px; border-radius: 6px; margin-bottom: 15px;"
-            th:text="${sucesso}"></div>
+            th:text="${sucesso}">
+        </div>
+
         <div th:if="${erro}"
             style="background-color: #f8d7da; color: #721c24; padding: 10px; border-radius: 6px; margin-bottom: 15px;"
-            th:text="${erro}"></div>
+            th:text="${erro}">
+        </div>
 
         <div th:if="${#lists.isEmpty(pedidos)}" class="empty-state">
             <h3>Você ainda não fez nenhum pedido.</h3>
@@ -50,6 +53,7 @@
                     <th>Ações</th>
                 </tr>
             </thead>
+
             <tbody>
                 <tr th:each="pedido : ${pedidos}">
                     <td th:text="'#' + ${pedido.id}"></td>
@@ -66,7 +70,6 @@
             </tbody>
         </table>
     </div>
-
 </body>
 
 </html>

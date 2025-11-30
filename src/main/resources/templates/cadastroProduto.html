@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <link rel="stylesheet" th:href="@{/css/cadastroProduto.css}">
@@ -13,9 +14,7 @@
 </head>
 
 <body>
-
     <main class="container">
-
         <form th:action="@{/cadastrarProduto}" method="post" enctype="multipart/form-data">
             <h1>Cadastrar Produto</h1>
 
@@ -49,7 +48,6 @@
                 <select name="categoria" id="categoria" required
                     style="background: transparent; border: none; width: 100%; color: #1d1d1d; outline: none; font-size: 1.0rem; cursor: pointer;">
                     <option value="" disabled selected>Selecione a Categoria</option>
-
                     <option value="bateria">Baterias</option>
                     <option value="pandeiro">Pandeiros</option>
                     <option value="prato">Pratos</option>
@@ -77,7 +75,6 @@
             document.getElementById('fileName').textContent = fileName;
         });
     </script>
-
 </body>
 
 </html>

@@ -4,18 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | O Batuketa</title>
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="icon" type="image/png" href="/img/logozin.png">
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <title>Login | O Batuketa</title>
 </head>
 
 <body>
     <div class="container" id="container">
-
         <div class="form-container sign-in-container">
             <form th:action="@{/login}" method="post">
                 <i class="fas fa-headphones" id="nav-logo"> B A T U K E T A</i>
@@ -24,6 +25,7 @@
                 <div th:if="${erro}" style="color: red; margin-bottom: 10px;">
                     <span th:text="${erro}"></span>
                 </div>
+
                 <div th:if="${sucesso}" style="color: green; margin-bottom: 10px;">
                     <span th:text="${sucesso}"></span>
                 </div>
@@ -32,6 +34,7 @@
                     <i class="fas fa-user"></i>
                     <input type="text" placeholder="Usuário ou Email" th:name="nome" required />
                 </div>
+
                 <div class="input-group">
                     <i class="fas fa-lock"></i>
                     <input type="password" placeholder="Senha" th:name="senha" required />
@@ -50,14 +53,17 @@
                     <i class="fas fa-user"></i>
                     <input type="text" placeholder="Nome" th:name="nome" required />
                 </div>
+
                 <div class="input-group">
                     <i class="fas fa-envelope"></i>
                     <input type="email" placeholder="Email" th:name="email" required />
                 </div>
+
                 <div class="input-group">
                     <i class="fas fa-envelope"></i>
                     <input type="text" placeholder="CPF" th:name="cpf" required />
                 </div>
+
                 <div class="input-group">
                     <i class="fas fa-lock"></i>
                     <input type="password" placeholder="Senha" th:name="senha" required />
@@ -68,13 +74,11 @@
                 <hr style="border: none; border-top: 1px solid #eee; margin: 15px 0;">
                 <a th:href="@{/cadastrarVendedor}" style="color: #333; font-size: 14px; text-decoration: none;">É um
                     vendedor? Cadastre-se aqui</a>
-
             </form>
         </div>
 
         <div class="overlay-container">
             <div class="overlay">
-
                 <div class="overlay-panel overlay-left">
                     <h1 class="title-overlay">Bem-vindo(a) de Volta!</h1>
                     <p class="subtitle-overlay">Para se conectar, por favor, faça login com suas informações pessoais.

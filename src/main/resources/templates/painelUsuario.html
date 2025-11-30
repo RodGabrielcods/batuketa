@@ -3,17 +3,19 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Meu Perfil</title>
+
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <link rel="stylesheet" th:href="@{/css/cadastroProduto.css}">
     <link rel="stylesheet" th:href="@{/css/perfilUsuario.css}">
+
+    <title>Meu Perfil</title>
 </head>
 
 <body>
     <main class="container">
-
         <div th:if="${sucesso}" class="alert alert-sucesso" th:text="${sucesso}"></div>
+
         <div th:if="${erro}" class="alert alert-erro" th:text="${erro}"></div>
 
         <div th:if="${tipoUsuario == 'CLIENTE'}">
@@ -25,26 +27,29 @@
                     <input type="text" placeholder="Nome" th:field="*{nome}" required>
                     <i class="bx bxs-user"></i>
                 </div>
+
                 <div class="input-box">
                     <input type="email" placeholder="Email" th:field="*{email}" required>
                     <i class="bx bxs-envelope"></i>
                 </div>
+
                 <div class="input-box">
                     <input type="text" placeholder="CPF" th:field="*{cpf}" required>
                     <i class="bx bxs-file"></i>
                 </div>
+
                 <div class="input-box">
                     <input type="password" placeholder="Nova Senha (deixe em branco para manter)" name="senha">
                     <i class="bx bxs-lock"></i>
                 </div>
 
                 <button type="submit" class="login">Atualizar Perfil</button>
+
                 <a th:href="@{/pedidos/meus-pedidos}" class="btn-pedidos">Ver Pedidos</a>
                 <a th:href="@{/loja}" class="btn-voltar">Voltar para Loja</a>
                 <a th:href="@{/minha-conta/deletar}" class="btn-deletar"
-                    onclick="return confirm('Tem certeza? Isso é irreversível e apagará sua conta.');">
-                    Deletar Minha Conta
-                </a>
+                    onclick="return confirm('Tem certeza? Isso é irreversível e apagará sua conta.');">Deletar Minha
+                    Conta</a>
             </form>
         </div>
 
@@ -57,14 +62,17 @@
                     <input type="text" placeholder="Nome" th:field="*{nome}" required>
                     <i class="bx bxs-user"></i>
                 </div>
+
                 <div class="input-box">
                     <input type="email" placeholder="Email" th:field="*{email}" required>
                     <i class="bx bxs-envelope"></i>
                 </div>
+
                 <div class="input-box">
                     <input type="text" placeholder="CNPJ" th:field="*{cnpj}" required>
                     <i class="bx bxs-file"></i>
                 </div>
+
                 <div class="input-box">
                     <input type="password" placeholder="Nova Senha (deixe em branco para manter)" name="senha">
                     <i class="bx bxs-lock"></i>
@@ -78,7 +86,6 @@
                 </a>
             </form>
         </div>
-
     </main>
 </body>
 
