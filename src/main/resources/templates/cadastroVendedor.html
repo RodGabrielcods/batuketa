@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastrar Vendedor</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/cadastroProduto.css}">
+</head>
+
+<body>
+    <main class="container">
+        <form th:action="@{/cadastrarVendedor}" th:object="${vendedor}" method="post">
+            <h1>Cadastrar Vendedor</h1>
+
+            <div th:if="${erro}" style="color: red; text-align: center; margin-bottom: 10px;">
+                <span th:text="${erro}"></span>
+            </div>
+
+            <div class="input-box">
+                <input type="text" placeholder="Nome" th:field="*{nome}" required>
+                <i class="bx bxs-user"></i>
+            </div>
+            <div class="input-box">
+                <input type="email" placeholder="Email" th:field="*{email}" required>
+                <i class="bx bxs-envelope"></i>
+            </div>
+            <div class="input-box">
+                <input type="text" placeholder="CNPJ" th:field="*{cnpj}" required>
+                <i class="bx bxs-file"></i>
+            </div>
+            <div class="input-box">
+                <input type="password" placeholder="Senha" th:field="*{senha}" required>
+                <i class="bx bxs-lock"></i>
+            </div>
+
+            <button type="submit" class="login">Cadastrar</button>
+            <a th:href="@{/login}" style="display: block; text-align: center; margin-top: 15px;">Já tem conta? Fazer
+                Login</a>
+        </form>
+    </main>
+</body>
+
+</html>

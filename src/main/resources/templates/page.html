@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="icon" type="image/png" href="/img/logozin.png">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <title>Batuketa</title>
+</head>
+
+<body>
+    <header>
+        <nav class="nav-bar">
+            <a href="/"><i class="fas fa-headphones" id="nav-logo"> B A T U K E T A</i></a>
+
+            <ul class="nav-list">
+                <li class="nav-item active">
+                    <a href="#home">Home</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#produtos">Produtos</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#notas">Avaliações</a>
+                </li>
+
+            </ul>
+
+            <div class="nav-actions">
+                <a th:unless="${session.usuarioLogado}" href="/login" class="nav-icon">
+                    <i class='bx bx-user'></i>
+                </a>
+
+                <a th:if="${session.usuarioLogado}" href="/meu-perfil" class="nav-icon">
+                    <i class='bx bxs-user-circle'></i>
+                </a>
+
+                <a href="/carrinho" class="nav-icon">
+                    <i class='bx bx-cart'></i>
+                </a>
+
+                <a th:if="${session.usuarioLogado}" href="/logout" class="nav-icon">
+                    <i class='bx bx-log-out'></i>
+                </a>
+
+            </div>
+            <button class="mobile-btn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </nav>
+
+        <div class="mobile-menu">
+            <ul class="mobile-nav-list">
+                <li class="nav-item">
+                    <a href="#home">Início</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#sobre">Sobre</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#instrumentos">Instrumentos</a>
+                </li>
+            </ul>
+
+            <button class="btn-default">Comprar</button>
+
+        </div>
+    </header>
+
+    <main class="content">
+        <section class="home" id="home">
+
+            <div class="shape"></div>
+
+            <div class="cta">
+                <h1 class="title">Os instrumentos vão até<span> você!</span></h1>
+
+                <p class="descripiton">
+                    Nosso objetivo é aproximar você do ritmo, levando os instrumentos até sua casa com praticidade,
+                    confiança e um atendimento que entende de música de verdade. Aqui, cada batida conta, e cada
+                    instrumento tem sua própria história.
+                </p>
+
+                <div class="cta-buttons">
+                    <a href="/mostrarproduto" class="btn-default">
+                        Ver Produtos
+                    </a>
+
+                    <a href="tel:+5555555555" class="phone-button">
+                        <button class="btn-default">
+                            <i class="fa-solid fa-phone"></i>
+                        </button>
+                        (15) 99149-7478
+                    </a>
+                </div>
+
+                <div class="social-midia-buttons">
+                    <a href="">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+
+                    <a href="">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+
+                    <a href="">
+                        <i class="fa-brands fa-facebook"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="banner">
+                <img src="img/hero.png" alt="imagem instrumentos">
+            </div>
+
+        </section>
+
+        <section class="menu" id="produtos">
+            <h2 class="section-title">Instrumentos</h2>
+
+            <h3 class="secton-subtitle">Nossos instrumentos especiais</h3>
+
+            <div class="drums">
+                <div class="drum">
+                    <div class="drum-heart">
+                        <i class="fa solid fa-heart"></i>
+                    </div>
+
+                    <img src="/img/bateria.png" alt="Imagem de uma Bateria" class="drum-image">
+
+                    <h3 class="drum-title">
+                        Bateria Completa
+                    </h3>
+
+                    <span class="drum-description">
+                        Bateria com todos os componentes
+                    </span>
+
+                    <div class="drum-rate">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <span>(500+)</span>
+                    </div>
+
+                    <div class="drum-price">
+                        <h4>R$2500,00</h4>
+                    </div>
+
+                </div>
+
+                <div class="drum">
+                    <div class="drum-heart">
+                        <i class="fa solid fa-heart"></i>
+                    </div>
+
+                    <img src="/img/bongui.jpg" alt="Imagen de um Bongo" class="drum-image">
+
+                    <h3 class="drum-title">
+                        Bongo
+                    </h3>
+
+                    <span class="drum-description">
+                        Bongo para tocar
+                    </span>
+
+                    <div class="drum-rate">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <span>(500+)</span>
+                    </div>
+
+                    <div class="drum-price">
+                        <h4>R$2500,00</h4>
+                    </div>
+
+                </div>
+
+                <div class="drum">
+                    <div class="drum-heart">
+                        <i class="fa solid fa-heart"></i>
+                    </div>
+
+                    <img src="/img/gimbe.png" alt="Imagem de um Djembê" class="drum-image">
+
+                    <h3 class="drum-title">
+                        Djembê
+                    </h3>
+
+                    <span class="drum-description">
+                        Djembê para barulhar nos bailes
+                    </span>
+
+                    <div class="drum-rate">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <span>(500+)</span>
+                    </div>
+
+                    <div class="drum-price">
+                        <h4>R$2500,00</h4>
+                    </div>
+
+                </div>
+
+                <div class="drum">
+                    <div class="drum-heart">
+                        <i class="fa solid fa-heart"></i>
+                    </div>
+
+                    <img src="/img/xexe.jpg" alt="Imagem de um Xilofone" class="drum-image">
+
+                    <h3 class="drum-title">
+                        Xilofone
+                    </h3>
+
+                    <span class="drum-description">
+                        Xilofone para quebrar nos sonzinhow
+                    </span>
+
+                    <div class="drum-rate">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <span>(500+)</span>
+                    </div>
+
+                    <div class="drum-price">
+                        <h4>R$2500,00</h4>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <section class="notas" id="notas">
+            <img src="/img/Design sem nome.png" alt="" class="notas-chef">
+
+            <div class="notas-content">
+                <h2 class="section-title">Depoimentos</h2>
+                <h3 class="section-subtitle">O que os clientes falam sobre nós!</h3>
+
+                <div class="feedbacks">
+                    <div class="feedback">
+                        <img src="/img/batera.jpg" alt="" class="feedback-avatar">
+
+                        <div class="feedback-content">
+                            <p>
+                                Leandro José
+                                <span>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                </span>
+                            </p>
+
+                            <p>
+                                "Comprei varios instrumentos para minha banda do IF, chegaram todos antes do prazo
+                                10000/10 !!!"
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="feedback">
+                        <img src="/img/batera.jpg" alt="" class="feedback-avatar">
+
+                        <div class="feedback-content">
+                            <p>
+                                Jovana Apurinã
+                                <span>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                </span>
+                            </p>
+
+                            <p>
+                                "Gostei muito, entrega muito rapida e muito cuidadosa com o produto 10/10 !!!"
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="feedback">
+                        <img src="/img/batera.jpg" alt="" class="feedback-avatar">
+
+                        <div class="feedback-content">
+                            <p>
+                                Bixuga da Silva
+                                <span>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                </span>
+                            </p>
+
+                            <p>
+                                "Comprei uma bateria para minha vó, ela gostou muito, agradeço a loja por me
+                                proporcionar essa experiência 100000/10!!!"
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <img src="img/wave.svg" alt="">
+
+        <div class="footer-itens">
+            <span class="copy">
+                &copy 2025 BATUKETA
+            </span>
+
+            <div class="social-midia-buttons">
+                <a href="">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
+
+                <a href="">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+
+                <a href="">
+                    <i class="fa-brands fa-facebook"></i>
+                </a>
+            </div>
+
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="/javascript/script.js"></script>
+
+</body>
+
+</html>

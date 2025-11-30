@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Meu Perfil</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/cadastroProduto.css}">
+    <link rel="stylesheet" th:href="@{/css/perfilUsuario.css}">
+</head>
+
+<body>
+    <main class="container">
+
+        <div th:if="${sucesso}" class="alert alert-sucesso" th:text="${sucesso}"></div>
+        <div th:if="${erro}" class="alert alert-erro" th:text="${erro}"></div>
+
+        <div th:if="${tipoUsuario == 'CLIENTE'}">
+            <form th:action="@{/meu-perfil/cliente}" th:object="${cliente}" method="post">
+                <h1>Meu Perfil</h1>
+                <input type="hidden" th:field="*{id}" />
+
+                <div class="input-box">
+                    <input type="text" placeholder="Nome" th:field="*{nome}" required>
+                    <i class="bx bxs-user"></i>
+                </div>
+                <div class="input-box">
+                    <input type="email" placeholder="Email" th:field="*{email}" required>
+                    <i class="bx bxs-envelope"></i>
+                </div>
+                <div class="input-box">
+                    <input type="text" placeholder="CPF" th:field="*{cpf}" required>
+                    <i class="bx bxs-file"></i>
+                </div>
+                <div class="input-box">
+                    <input type="password" placeholder="Nova Senha (deixe em branco para manter)" name="senha">
+                    <i class="bx bxs-lock"></i>
+                </div>
+
+                <button type="submit" class="login">Atualizar Perfil</button>
+                <a th:href="@{/loja}" class="btn-voltar">Voltar para Loja</a>
+                <a th:href="@{/minha-conta/deletar}" class="btn-deletar"
+                    onclick="return confirm('Tem certeza? Isso é irreversível e apagará sua conta.');">
+                    Deletar Minha Conta
+                </a>
+            </form>
+        </div>
+
+        <div th:if="${tipoUsuario == 'VENDEDOR'}">
+            <form th:action="@{/meu-perfil/vendedor}" th:object="${vendedor}" method="post">
+                <h1>Meu Perfil</h1>
+                <input type="hidden" th:field="*{id}" />
+
+                <div class="input-box">
+                    <input type="text" placeholder="Nome" th:field="*{nome}" required>
+                    <i class="bx bxs-user"></i>
+                </div>
+                <div class="input-box">
+                    <input type="email" placeholder="Email" th:field="*{email}" required>
+                    <i class="bx bxs-envelope"></i>
+                </div>
+                <div class="input-box">
+                    <input type="text" placeholder="CNPJ" th:field="*{cnpj}" required>
+                    <i class="bx bxs-file"></i>
+                </div>
+                <div class="input-box">
+                    <input type="password" placeholder="Nova Senha (deixe em branco para manter)" name="senha">
+                    <i class="bx bxs-lock"></i>
+                </div>
+
+                <button type="submit" class="login">Atualizar Perfil</button>
+                <a th:href="@{/meus-produtos}" class="btn-voltar">Voltar ao Painel</a>
+                <a th:href="@{/minha-conta/deletar}" class="btn-deletar"
+                    onclick="return confirm('Tem certeza? Isso é irreversível e apagará sua conta e TODOS os seus produtos.');">
+                    Deletar Minha Conta
+                </a>
+            </form>
+        </div>
+
+    </main>
+</body>
+
+</html>

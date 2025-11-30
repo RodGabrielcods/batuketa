@@ -1,0 +1,242 @@
+:root {
+    --cor-primaria: #F8D07A;
+    --cor-fundo: #FEFBF3;
+    --cor-texto: #333333;
+    --cor-borda: #E0E0E0;
+    --cor-sucesso: #28a745;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--cor-texto);
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--cor-borda);
+    border-radius: 20px;
+    padding: 5px 10px;
+}
+
+.search-box input {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: 'Poppins', sans-serif;
+}
+
+.painel-cliente {
+    padding-top: 40px;
+    padding-bottom: 60px;
+}
+
+.painel-cliente h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.saudacao {
+    font-size: 1.1rem;
+    margin-bottom: 40px;
+    color: #555;
+}
+
+.painel-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 40px;
+}
+
+.painel-secao {
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.painel-secao h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 25px;
+    border-bottom: 2px solid var(--cor-primaria);
+    padding-bottom: 10px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    background-color: #f9f9f9;
+}
+
+.form-group input:disabled {
+    color: #555;
+}
+
+.btn-editar {
+    background-color: var(--cor-texto);
+    color: #FFFFFF;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 25px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-editar:hover {
+    background-color: #555;
+}
+
+.pedido-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--cor-borda);
+}
+
+.pedido-item:last-child {
+    border-bottom: none;
+}
+
+.pedido-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.pedido-info strong {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.pedido-info .pedido-data {
+    font-size: 0.9rem;
+    color: #777;
+}
+
+.pedido-status {
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 3px 8px;
+    border-radius: 12px;
+    margin-top: 5px;
+    align-self: flex-start;
+}
+
+.pedido-status.entregue {
+    background-color: #e9f7ec;
+    color: var(--cor-sucesso);
+}
+
+.pedido-status.em-transporte {
+    background-color: #fff8e6;
+    color: var(--cor-aviso);
+}
+
+.pedido-total {
+    text-align: right;
+}
+
+.pedido-total span {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.btn-ver-detalhes {
+    background-color: var(--cor-primaria);
+    color: var(--cor-texto);
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: transform 0.2s ease;
+}
+
+.btn-ver-detalhes:hover {
+    transform: scale(1.05);
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icons a {
+    color: var(--cor-texto);
+    font-size: 1.2rem;
+}
+
+@media (max-width: 768px) {
+    .painel-wrapper {
+        grid-template-columns: 1fr;
+    }
+
+    .navbar .container {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .nav-icons {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .search-box {
+        flex-grow: 1;
+    }
+
+    .search-box input {
+        width: 100%;
+    }
+}

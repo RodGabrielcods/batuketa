@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Meus Produtos</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/painelVendedor.css}">
+</head>
+
+<body>
+    <main class="container">
+        <div class="header">
+            <h1>Painel do Vendedor: <span th:text="${nomeVendedor}"></span></h1>
+            <div class="header-actions">
+                <a th:href="@{/meu-perfil}" class="btn btn-perfil">Editar Perfil</a>
+                <a th:href="@{/loja}" class="btn btn-loja">Ver Loja</a>
+                <a th:href="@{/cadastrarProduto}" class="btn btn-novo">Novo Produto</a>
+                <a th:href="@{/logout}" class="btn btn-logout">Sair (Logout)</a>
+            </div>
+        </div>
+
+        <div th:if="${erro}" class="alert">
+            <span th:text="${erro}"></span>
+        </div>
+
+        <h2>Meus Produtos Cadastrados</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Imagem</th>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Preço</th>
+                    <th>Qtd.</th>
+                    <th>Categoria</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="produto : ${produtos}">
+                    <td><img th:src="@{${produto.imagem}}" alt="Imagem" /></td>
+                    <td th:text="${produto.id}">1</td>
+                    <td th:text="${produto.nome}">Nome do Produto</td>
+                    <td th:text="${#numbers.formatCurrency(produto.valor)}">R$ 10,00</td>
+                    <td th:text="${produto.quantidade}">10</td>
+                    <td th:text="${produto.categoria}">Categoria</td>
+                    <td>
+                        <a th:href="@{/produto/editar/{id}(id=${produto.id})}" class="btn btn-editar">Editar</a>
+                        <a th:href="@{/produto/deletar/{id}(id=${produto.id})}" class="btn btn-deletar"
+                            onclick="return confirm('Tem certeza que deseja deletar?');">Deletar</a>
+                    </td>
+                </tr>
+                <tr th:if="${produtos == null or produtos.isEmpty()}">
+                    <td colspan="7" style="text-align: center;">Você ainda não cadastrou nenhum produto.</td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+</body>
+
+</html>

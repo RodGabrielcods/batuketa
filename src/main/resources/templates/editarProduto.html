@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Produto</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/cadastroProduto.css}">
+</head>
+
+<body>
+    <main class="container">
+        <form th:action="@{/produto/editar}" th:object="${produto}" method="post" enctype="multipart/form-data">
+            <h1>Editar Produto</h1>
+            <input type="hidden" th:field="*{id}" />
+
+            <div th:if="${erro}" style="color: red; text-align: center; margin-bottom: 10px;">
+                <span th:text="${erro}"></span>
+            </div>
+
+            <div class="input-box">
+                <input type="text" placeholder="Nome do produto" th:field="*{nome}" required>
+                <i class="bx bxs-package"></i>
+            </div>
+            <div class="input-box">
+                <input type="number" placeholder="Valor" th:field="*{valor}" step="0.01" required>
+                <i class="bx bxs-dollar-circle"></i>
+            </div>
+            <div class="input-box">
+                <input type="text" placeholder="Descrição" th:field="*{descricao}" required>
+                <i class="bx bxs-file"></i>
+            </div>
+            <div class="input-box">
+                <input type="number" placeholder="Quantidade" th:field="*{quantidade}" required>
+                <i class="bx bxs-calculator"></i>
+            </div>
+            <div class="input-box">
+                <input type="text" placeholder="Categoria" th:field="*{categoria}" required>
+                <i class='bx bxs-purchase-tag'></i>
+            </div>
+
+            <div class="file-upload">
+                <p>Imagem Atual: <img th:src="*{imagem}" alt="Imagem atual" width="100"></p>
+                <label for="fileInput" class="file-label">
+                    <i class="bx bxs-cloud-upload"></i>
+                    <span id="fileName">Trocar imagem... (opcional)</span>
+                </label>
+                <input type="file" id="fileInput" name="imagemFile" accept="image/*">
+            </div>
+
+            <button type="submit" class="login">Atualizar</button>
+            <a th:href="@{/meus-produtos}" style="display: block; text-align: center; margin-top: 15px;">Cancelar</a>
+        </form>
+    </main>
+    <script>
+        document.getElementById('fileInput').addEventListener('change', function () {
+            var fileName = this.files[0] ? this.files[0].name : 'Nenhum arquivo escolhido';
+            document.getElementById('fileName').textContent = fileName;
+        });
+    </script>
+</body>
+
+</html>

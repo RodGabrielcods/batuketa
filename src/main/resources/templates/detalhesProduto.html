@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="/css/desc.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/desc.css}">
+
+    <title>Detalhes do produto</title>
+</head>
+
+<body>
+
+    <header>
+        <nav class="nav-bar">
+            <i class="fas fa-headphones" id="nav-logo"> B A T U K E T A</i>
+
+            <ul class="nav-list">
+                <li class="nav-item active">
+                    <a href="#home">Home</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#produtos">Produtos</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#notas">Avaliações</a>
+                </li>
+
+            </ul>
+
+            <div class="nav-actions">
+                <div class="search-box">
+                    <input type="text" placeholder="Buscar...">
+                    <i class='bx bx-search'></i>
+                </div>
+
+                <a href="/" class="nav-icon">
+                    <i class='bx bx-user'></i>
+                </a>
+
+                <a href="/carrinho" class="nav-icon">
+                    <i class='bx bx-cart'></i>
+                </a>
+            </div>
+
+            <button class="mobile-btn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </nav>
+
+
+        <div class="mobile-menu">
+            <ul class="mobile-nav-list">
+                <li class="nav-item">
+                    <a href="#home">Início</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#sobre">Sobre</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#instrumentos">Instrumentos</a>
+                </li>
+            </ul>
+
+            <button class="btn-default">Comprar</button>
+
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="produto-detalhe-container">
+
+            <div class="produto-imagens">
+                <img src="/img/bateria.png" alt="Bateria Acústica" class="imagem-principal">
+                <div class="imagens-thumbnail">
+                    <img src="/img/bateria.png" alt="thumbnail 1" class="thumb-item active">
+                    <img src="/img/bateria.png" alt="thumbnail 2" class="thumb-item">
+                    <img src="/img/bateria.png" alt="thumbnail 3" class="thumb-item">
+                    <img src="/img/bateria.png" alt="thumbnail 4" class="thumb-item">
+                </div>
+            </div>
+
+            <div class="produto-info">
+                <h1>Bateria Acústica Premium</h1>
+                <div class="preco-bloco">
+                    <span class="preco-atual">R$ 5.550,00</span>
+                    <span class="parcelamento">em até 12x R$ 462,50 sem juros</span>
+                </div>
+
+                <p class="descricao">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere accusamus, perspiciatis, dolor
+                    pariatur itaque incidunt deleniti placeat sequi cupiditate, laboriosam veritatis in distinctio
+                    perferendis alias est ullam nostrum voluptatum exercitationem?
+                </p>
+
+                <div class="especificacoes">
+                    <h3>Especificações Técnicas</h3>
+                    <ul>
+                        <li>Material: Maple / Birch</li>
+                        <li>Acabamento: Verniz Brilhante</li>
+                        <li>Peles: Remo Pinstripe</li>
+                        <li>Configuração: Bumbo 22", Tons 10"/12", Surdo 16"</li>
+                    </ul>
+                </div>
+
+                <div class="div-btn">
+                    <button class="btn-default btn-comprar">Comprar Agora</button>
+                    <button class="btn-default btn-adicionar">Adicionar ao carrinho</button>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="menu" id="produtos-relacionados">
+            <h2 class="section-title">Quem viu, viu também</h2>
+            <h3 class="secton-subtitle">Outros instrumentos especiais</h3>
+
+            <div class="drums">
+
+                <div class="drum">
+                    <div class="drum-heart">
+                        <i class="fa-regular fa-heart"></i>
+                    </div>
+                    <img src="/img/bateria.png" alt="" class="drum-image">
+                    <h3 class="drum-title">Bateria Massa</h3>
+                    <span class="drum-description">Muito legal</span>
+                    <div class="drum-rate">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <span>(500+)</span>
+                    </div>
+                    <div class="drum-price">
+                        <h4>R$2500,00</h4>
+                        <button class="btn-default-card">
+                            <i class="fa-solid fa-basket-shopping"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="drum">
+                    <div class="drum-heart">
+                        <i class="fa-regular fa-heart"></i>
+                    </div>
+                    <img src="/img/bateria.png" alt="" class="drum-image">
+                    <h3 class="drum-title">Bateria Massa</h3>
+                    <span class="drum-description">Muito legal</span>
+                    <div class="drum-rate">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <span>(500+)</span>
+                    </div>
+                    <div class="drum-price">
+                        <h4>R$2500,00</h4>
+                        <button class="btn-default-card">
+                            <i class="fa-solid fa-basket-shopping"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="drum">
+                    <div class="drum-heart">
+                        <i class="fa-regular fa-heart"></i>
+                    </div>
+                    <img src="/img/bateria.png" alt="" class="drum-image">
+                    <h3 class="drum-title">Bateria Massa</h3>
+                    <span class="drum-description">Muito legal</span>
+                    <div class="drum-rate">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <span>(500+)</span>
+                    </div>
+                    <div class="drum-price">
+                        <h4>R$2500,00</h4>
+                        <button class="btn-default-card">
+                            <i class="fa-solid fa-basket-shopping"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="drum">
+                    <div class="drum-heart">
+                        <i class="fa-regular fa-heart"></i>
+                    </div>
+                    <img src="/img/bateria.png" alt="" class="drum-image">
+                    <h3 class="drum-title">Bateria Massa</h3>
+                    <span class="drum-description">Muito legal</span>
+                    <div class="drum-rate">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <span>(500+)</span>
+                    </div>
+                    <div class="drum-price">
+                        <h4>R$2500,00</h4>
+                        <button class="btn-default-card">
+                            <i class="fa-solid fa-basket-shopping"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <img src="img/wave.svg" alt="">
+
+        <div class="footer-itens">
+            <span class="copy">
+                &copy 2025 BATUKETA
+            </span>
+
+            <div class="social-midia-buttons">
+                <a href="">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
+
+                <a href="">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+
+                <a href="">
+                    <i class="fa-brands fa-facebook"></i>
+                </a>
+            </div>
+
+        </div>
+    </footer>
+
+</body>
+
+</html>

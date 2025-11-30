@@ -1,0 +1,119 @@
+:root {
+    --primary-color: #ffcb45;
+    --secondary-color: #e9a209;
+    --background-light: #fff9ea;
+    --text-dark: #1d1d1d;
+    --input-bg: #f3f3f3;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--background-light);
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    width: 500px;
+    max-width: 90%;
+    padding: 40px 50px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.container:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+}
+
+#nav-logo {
+    font-size: 22px;
+    color: var(--secondary-color);
+    font-weight: 700;
+    display: inline-block;
+    margin-bottom: 25px;
+}
+
+.main-title {
+    color: var(--text-dark);
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+.input-group {
+    background-color: var(--input-bg);
+    display: flex;
+    align-items: center;
+    margin: 12px 0;
+    padding: 12px 15px;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.input-group i {
+    color: #a0a0a0;
+    margin-right: 12px;
+    font-size: 1.1rem;
+}
+
+.input-group input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 1rem;
+    color: var(--text-dark);
+}
+
+.btn-primary {
+    border-radius: 12px;
+    border: none;
+    background-color: var(--primary-color);
+    color: var(--text-dark);
+    font-size: 16px;
+    font-weight: 600;
+    padding: 12px 50px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, transform 80ms ease-in;
+    cursor: pointer;
+    margin-top: 25px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary:hover {
+    background-color: #f8d477;
+}
+
+.btn-primary:active {
+    transform: scale(0.98);
+}
+
+@media (max-width: 600px) {
+    .container {
+        width: 95%;
+        padding: 30px 25px;
+    }
+
+    .main-title {
+        font-size: 1.6rem;
+    }
+
+    .btn-primary {
+        width: 100%;
+        padding: 12px;
+    }
+}

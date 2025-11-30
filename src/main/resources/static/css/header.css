@@ -1,0 +1,123 @@
+header {
+    width: 100%;
+    padding: 28px 8%;
+    position: sticky;
+    top: 0;
+    background-color: #fff9ea;
+    z-index: 3;
+}
+
+.nav-bar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#nav-logo {
+    font-size: 30px;
+    color: #e9a209;
+}
+
+.nav-list {
+    display: flex;
+    list-style: none;
+    gap: 48px;
+}
+
+.nav-item a {
+    text-decoration: none;
+    color: #1d1d1dad;
+    font-weight: 600;
+}
+
+.nav-item.active a {
+    color: #1d1d1d;
+    border-bottom: 3px solid #ffe100;
+}
+
+.mobile-btn {
+    display: none;
+}
+
+.mobile-menu {
+    display: none;
+}
+
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.search-box {
+    position: relative;
+}
+
+.search-box input {
+    padding: 8px 36px 8px 12px;
+    border-radius: 20px;
+    border: 1px solid #e9a209;
+    outline: none;
+    font-size: 14px;
+}
+
+.search-box i {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #e9a209;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.nav-icon i {
+    font-size: 24px;
+    color: #e9a209;
+    transition: 0.3s;
+}
+
+.nav-icon i:hover {
+    color: #1d1d1d;
+}
+
+@media screen and (max-width: 1170px) {
+
+    .nav-list,
+    .nav-bar .btn-default {
+        display: none;
+    }
+
+    .mobile-btn {
+        display: block;
+        border: none;
+        background-color: transparent;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+
+    .mobile-menu.active {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .mobile-nav-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin: 12px 0px;
+
+    }
+
+    .mobile-nav-list .nav-item {
+        list-style: none;
+        text-align: center;
+    }
+
+    .nav-actions {
+        display: none;
+    }
+}

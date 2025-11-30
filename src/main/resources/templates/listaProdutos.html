@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="/img/logozin.png">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/stylesList.css}">
+
+    <title>Produtos - Batuketa</title>
+</head>
+
+<body>
+
+    <header>
+        <nav class="nav-bar">
+            <a href="/"><i class="fas fa-headphones" id="nav-logo"> B A T U K E T A</i></a>
+
+            <ul class="nav-list">
+                <li class="nav-item"><a href="/#home">Home</a></li>
+                <li class="nav-item active"><a href="/produtos">Produtos</a></li>
+                <li class="nav-item"><a href="/#notas">Avaliações</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <a th:unless="${session.usuarioLogado}" href="/login" class="nav-icon"><i class='bx bx-user'></i></a>
+                <a th:if="${session.usuarioLogado}" href="/meu-perfil" class="nav-icon"><i
+                        class='bx bxs-user-circle'></i></a>
+                <a href="/carrinho" class="nav-icon"><i class='bx bx-cart'></i></a>
+                <a th:if="${session.usuarioLogado}" href="/logout" class="nav-icon"><i class='bx bx-log-out'></i></a>
+            </div>
+            <button class="mobile-btn"><i class="fa-solid fa-bars"></i></button>
+        </nav>
+
+        <div class="mobile-menu">
+            <ul class="mobile-nav-list">
+                <li class="nav-item"><a href="/#home">Início</a></li>
+                <li class="nav-item"><a href="/#sobre">Sobre</a></li>
+                <li class="nav-item"><a href="/#instrumentos">Instrumentos</a></li>
+            </ul>
+
+            <button class="btn-default">Comprar</button>
+        </div>
+
+    </header>
+
+    <main class="container-lista page-produtos">
+        <div class="titulo-pagina">
+            <h2 class="section-title">Todos os Instrumentos</h2>
+            <h3 class="section-subtitle">Explore nossa coleção completa</h3>
+        </div>
+
+        <div class="produtos-layout">
+            <aside class="filtros">
+                <h3>Filtros</h3>
+
+                <div class="filtro-grupo">
+                    <h4>Categoria</h4>
+
+                    <ul>
+                        <li><a th:href="@{/produtos}" th:class="${categoriaAtiva == null} ? 'filtro-ativo' : ''">Todas
+                                as Categorias</a></li>
+                        <li><a th:href="@{/produtos(categoria='bateria')}"
+                                th:class="${categoriaAtiva == 'bateria'} ? 'filtro-ativo' : ''">Baterias</a></li>
+                        <li><a th:href="@{/produtos(categoria='pandeiro')}"
+                                th:class="${categoriaAtiva == 'pandeiro'} ? 'filtro-ativo' : ''">Pandeiros</a></li>
+                        <li><a th:href="@{/produtos(categoria='prato')}"
+                                th:class="${categoriaAtiva == 'prato'} ? 'filtro-ativo' : ''">Pratos</a></li>
+                        <li><a th:href="@{/produtos(categoria='acessorio')}"
+                                th:class="${categoriaAtiva == 'acessorio'} ? 'filtro-ativo' : ''">Acessórios</a></li>
+                    </ul>
+                </div>
+            </aside>
+
+            <section class="grid-produtos">
+                <div class="drums">
+                    <div class="drum" th:each="produto : ${produtos}">
+                        <div class="drum-heart"><i class="fa-regular fa-heart"></i></div>
+
+                        <img th:src="@{${produto.imagem}}" alt="Imagem do Produto" class="drum-image">
+
+                        <h3 class="drum-title" th:text="${produto.nome}">Nome do Produto</h3>
+
+                        <span class="drum-description" th:text="${produto.descricao}">Descrição</span>
+
+                        <div class="drum-rate">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <span>(500+)</span>
+                        </div>
+
+                        <div class="drum-price">
+                            <h4 th:text="${#numbers.formatCurrency(produto.valor)}">R$2500,00</h4>
+
+                            <form th:action="@{/carrinho/add}" method="post">
+                                <input type="hidden" name="sku" th:value="${produto.id}">
+                                <button type="submit" class="btn-card-add" style="border:none; cursor:pointer;">
+                                    <i class="fa-solid fa-basket-shopping"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+
+                    <div th:if="${produtos == null or produtos.isEmpty()}" style="text-align: center; width: 100%;">
+                        <h3>Nenhum produto encontrado para esta categoria.</h3>
+
+                        <a th:href="@{/produtos}">Limpar filtro</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <img src="/img/wave.svg" alt="" style="width: 100%; display: block;">
+
+        <div class="footer-itens">
+            <span class="copy">&copy; 2025 BATUKETA</span>
+            <div class="social-midia-buttons">
+                <a href=""><i class="fa-brands fa-whatsapp"></i></a>
+                <a href=""><i class="fa-brands fa-instagram"></i></a>
+                <a href=""><i class="fa-brands fa-facebook"></i></a>
+            </div>
+        </div>
+    </footer>
+    <script src="/javascript/script.js"></script>
+</body>
+
+</html>

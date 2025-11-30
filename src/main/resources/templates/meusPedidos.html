@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meus Pedidos - Leel</title>
+
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/pedidos.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="nav-bar">
+            <div id="nav-logo">Leel</div>
+            <nav>
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="/loja">Loja</a></li>
+                    <li class="nav-item"><a href="/meu-perfil">Perfil</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container-pedidos">
+        <h2 class="titulo-secao">Meus Pedidos</h2>
+
+        <div th:if="${sucesso}"
+            style="background-color: #d4edda; color: #155724; padding: 10px; border-radius: 6px; margin-bottom: 15px;"
+            th:text="${sucesso}"></div>
+        <div th:if="${erro}"
+            style="background-color: #f8d7da; color: #721c24; padding: 10px; border-radius: 6px; margin-bottom: 15px;"
+            th:text="${erro}"></div>
+
+        <div th:if="${#lists.isEmpty(pedidos)}" class="empty-state">
+            <h3>Você ainda não fez nenhum pedido.</h3>
+            <p style="margin: 10px 0;">Que tal dar uma olhada nos nossos produtos?</p>
+            <a href="/loja" class="btn-detalhes" style="display: inline-block; margin-top: 10px;">Ir às compras</a>
+        </div>
+
+        <table th:if="${not #lists.isEmpty(pedidos)}" class="table-pedidos">
+            <thead>
+                <tr>
+                    <th># Pedido</th>
+                    <th>Data</th>
+                    <th>Status</th>
+                    <th>Total</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="pedido : ${pedidos}">
+                    <td th:text="'#' + ${pedido.id}"></td>
+                    <td th:text="${#temporals.format(pedido.dataPedido, 'dd/MM/yyyy HH:mm')}"></td>
+                    <td>
+                        <span class="status-badge" th:classappend="'status-' + ${pedido.status.split(' ')[0]}"
+                            th:text="${pedido.status}"></span>
+                    </td>
+                    <td th:text="'R$ ' + ${#numbers.formatDecimal(pedido.valorTotal, 1, 'POINT', 2, 'COMMA')}"></td>
+                    <td>
+                        <a th:href="@{/pedidos/{id}(id=${pedido.id})}" class="btn-detalhes">Ver Detalhes</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+
+</html>

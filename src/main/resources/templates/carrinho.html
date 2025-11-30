@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Seu Carrinho</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/cart.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="icon" type="image/png" href="/img/logozin.png">
+</head>
+
+<body>
+
+    <header>
+        <nav class="nav-bar">
+            <a href="/"><i class="fas fa-headphones" id="nav-logo"> B A T U K E T A</i></a>
+
+            <div class="nav-actions">
+
+                <a th:unless="${session.usuarioLogado}" href="/login" class="nav-icon">
+                    <i class='bx bx-user'></i> </a>
+
+                <a th:if="${session.usuarioLogado}" href="/meu-perfil" class="nav-icon">
+                    <i class='bx bxs-user-circle'></i> </a>
+
+                <a href="/carrinho" class="nav-icon">
+                    <i class='bx bx-cart'></i>
+                </a>
+
+                <a th:if="${session.usuarioLogado}" href="/logout" class="nav-icon">
+                    <i class='bx bx-log-out'></i> </a>
+            </div>
+            <button class="mobile-btn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </nav>
+
+
+        <div class="mobile-menu">
+            <ul class="mobile-nav-list">
+                <li class="nav-item">
+                    <a href="#home">Início</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#sobre">Sobre</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#instrumentos">Instrumentos</a>
+                </li>
+            </ul>
+
+            <button class="btn-default">Comprar</button>
+
+        </div>
+    </header>
+
+    <div class="cart-container">
+        <h1><i class="fa-solid fa-cart-shopping"></i> Seu Carrinho</h1>
+
+        <div th:if="${erro}"
+            style="background-color: #f8d7da; color: #721c24; padding: 10px; margin-bottom: 15px; border-radius: 5px;"
+            th:text="${erro}"></div>
+
+        <div th:if="${#lists.isEmpty(itens)}">
+            <p>Seu carrinho está vazio.</p>
+            <a th:href="@{/loja}" class="btn-default" style="color: black;">← Voltar à Loja</a>
+        </div>
+
+        <div th:if="${not #lists.isEmpty(itens)}">
+            <p style="font-size: 0.8em; color: #777; margin-bottom: 10px;">
+                <strong>ID:</strong> <span th:text="${cartId}"></span>
+            </p>
+
+            <form th:action="@{/carrinho/remember}" method="post" class="remember-form">
+                <label>
+                    <input type="checkbox" name="on" th:checked="${persistent}"> Lembrar carrinho por 7 dias
+                </label>
+                <button type="submit" class="btn-default">Salvar</button>
+            </form>
+
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>Produto</th>
+                        <th>Preço</th>
+                        <th>Quantidade</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="item : ${itens}">
+                        <td style="display: flex; align-items: center; gap: 15px;">
+                            <img th:src="${item.produto.imagem != null ? item.produto.imagem : '/img/default.png'}"
+                                style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px;">
+                            <div>
+                                <span style="font-weight: bold; display: block;"
+                                    th:text="${item.produto.nome}">Nome</span>
+                                <span style="font-size: 0.8em; color: #777;"
+                                    th:text="'Ref: ' + ${item.produto.id}"></span>
+                            </div>
+                        </td>
+
+                        <td th:text="'R$ ' + ${#numbers.formatDecimal(item.produto.valor, 1, 'POINT', 2, 'COMMA')}">
+                        </td>
+
+                        <td>
+                            <div class="qty-controls">
+                                <form th:action="@{/carrinho/remove}" method="post" style="display:inline;">
+                                    <input type="hidden" name="sku" th:value="${item.produto.id}">
+                                    <button type="submit" class="btn-small">−</button>
+                                </form>
+
+                                <span th:text="${item.quantidade}" class="qty-number"></span>
+
+                                <form th:action="@{/carrinho/add}" method="post" style="display:inline;">
+                                    <input type="hidden" name="sku" th:value="${item.produto.id}">
+                                    <button type="submit" class="btn-small">+</button>
+                                </form>
+                            </div>
+                        </td>
+
+                        <td style="font-weight: bold;"
+                            th:text="'R$ ' + ${#numbers.formatDecimal(item.subtotal, 1, 'POINT', 2, 'COMMA')}"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="cart-summary">
+                <div class="summary-box">
+                    <h3>Total do Pedido</h3>
+                    <p><strong style="font-size: 1.5em; color: #28a745;"
+                            th:text="'R$ ' + ${#numbers.formatDecimal(total, 1, 'POINT', 2, 'COMMA')}"></strong></p>
+                </div>
+            </div>
+
+            <div class="actions">
+                <a th:href="@{/loja}" class="btn-default">← Continuar Comprando</a>
+
+                <form th:action="@{/carrinho/limpar}" method="post">
+                    <button class="btn-default" type="submit">Esvaziar</button>
+                </form>
+
+                <form th:action="@{/pedidos/finalizar}" method="post">
+                    <button type="submit" class="btn-default">Finalizar Compra</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html> 
