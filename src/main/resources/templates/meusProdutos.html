@@ -3,60 +3,86 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Meus Produtos</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>Meus Produtos - Batuketa</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
     <link rel="stylesheet" th:href="@{/css/painelVendedor.css}">
 </head>
 
 <body>
-    <main class="container">
-        <div class="header">
-            <h1>Painel do Vendedor: <span th:text="${nomeVendedor}"></span></h1>
-            <div class="header-actions">
-                <a th:href="@{/meu-perfil}" class="btn btn-perfil">Editar Perfil</a>
-                <a th:href="@{/loja}" class="btn btn-loja">Ver Loja</a>
-                <a th:href="@{/cadastrarProduto}" class="btn btn-novo">Novo Produto</a>
-                <a th:href="@{/logout}" class="btn btn-logout">Sair (Logout)</a>
+    <main class="container-painel">
+        <div class="painel-header">
+            <div class="titulo-area">
+                <h1>Painel do Vendedor</h1>
+                <p>Olá, <span th:text="${nomeVendedor}" class="highlight-name">Vendedor</span>! Gerencie seus produtos
+                    aqui.</p>
+            </div>
+
+            <div class="painel-actions">
+                <a th:href="@{/meu-perfil}" class="btn-painel btn-secondary">Editar Perfil</a>
+                <a th:href="@{/cadastrarProduto}" class="btn-painel btn-primary">
+                    <span>+</span> Novo Produto
+                </a>
+                <a th:href="@{/logout}" class="btn-painel btn-danger">Sair</a>
             </div>
         </div>
 
-        <div th:if="${erro}" class="alert">
+        <div th:if="${erro}" class="alert-box">
             <span th:text="${erro}"></span>
         </div>
 
-        <h2>Meus Produtos Cadastrados</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Imagem</th>
-                    <th>ID</th>
-                    <th>Nome</th>
-                    <th>Preço</th>
-                    <th>Qtd.</th>
-                    <th>Categoria</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="produto : ${produtos}">
-                    <td><img th:src="@{${produto.imagem}}" alt="Imagem" /></td>
-                    <td th:text="${produto.id}">1</td>
-                    <td th:text="${produto.nome}">Nome do Produto</td>
-                    <td th:text="${#numbers.formatCurrency(produto.valor)}">R$ 10,00</td>
-                    <td th:text="${produto.quantidade}">10</td>
-                    <td th:text="${produto.categoria}">Categoria</td>
-                    <td>
-                        <a th:href="@{/produto/editar/{id}(id=${produto.id})}" class="btn btn-editar">Editar</a>
-                        <a th:href="@{/produto/deletar/{id}(id=${produto.id})}" class="btn btn-deletar"
-                            onclick="return confirm('Tem certeza que deseja deletar?');">Deletar</a>
-                    </td>
-                </tr>
-                <tr th:if="${produtos == null or produtos.isEmpty()}">
-                    <td colspan="7" style="text-align: center;">Você ainda não cadastrou nenhum produto.</td>
-                </tr>
-            </tbody>
-        </table>
+        <section class="lista-produtos">
+            <h2>Meus Produtos Cadastrados</h2>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Imagem</th>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Preço</th>
+                            <th>Qtd.</th>
+                            <th>Categoria</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="produto : ${produtos}">
+                            <td>
+                                <div class="img-wrapper">
+                                    <img th:src="@{${produto.imagem}}" alt="Imagem do Produto" />
+                                </div>
+                            </td>
+                            <td th:text="${produto.id}" class="id-col">1</td>
+                            <td th:text="${produto.nome}" class="nome-col">Nome do Produto</td>
+                            <td th:text="${#numbers.formatCurrency(produto.valor)}" class="preco-col">R$ 10,00</td>
+                            <td th:text="${produto.quantidade}">10</td>
+                            <td th:text="${produto.categoria}">Categoria</td>
+                            <td class="actions-col">
+                                <a th:href="@{/produto/editar/{id}(id=${produto.id})}" class="action-link edit"
+                                    title="Editar">
+                                    ✏️ Editar
+                                </a>
+                                <a th:href="@{/produto/deletar/{id}(id=${produto.id})}" class="action-link delete"
+                                    onclick="return confirm('Tem certeza que deseja deletar este produto?');"
+                                    title="Deletar">
+                                    🗑️ Deletar
+                                </a>
+                            </td>
+                        </tr>
+                        <tr th:if="${produtos == null or produtos.isEmpty()}">
+                            <td colspan="7" class="empty-state">
+                                <p>Você ainda não cadastrou nenhum produto.</p>
+                                <a th:href="@{/cadastrarProduto}" class="link-destaque">Começar agora</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
     </main>
+
+    <footer th:replace="~{page :: footer}"></footer>
 </body>
 
 </html>

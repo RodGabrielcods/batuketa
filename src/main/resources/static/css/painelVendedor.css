@@ -1,99 +1,263 @@
+/* Reseta margens para garantir alinhamento com o header */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #fff9ea;
+    /* Fundo creme padrão do site */
+    color: #1d1d1d;
+    font-family: 'Poppins', sans-serif;
 }
 
-.container {
+.container-painel {
     max-width: 1200px;
-    margin: 20px auto;
-    padding: 20px;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 40px auto;
+    padding: 0 5%;
+    min-height: 60vh;
 }
 
-.header {
+/* --- Cabeçalho do Painel --- */
+.painel-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 2px solid #eee;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+    margin-bottom: 40px;
     flex-wrap: wrap;
+    gap: 20px;
 }
 
-.header h1 {
-    margin: 0;
+.titulo-area h1 {
+    font-size: 2rem;
+    color: #e9a209;
+    margin-bottom: 5px;
+    font-family: 'Dela Gothic One', cursive;
+    /* Fonte do logo se disponível, ou Poppins bold */
+    letter-spacing: -1px;
 }
 
-.header-actions {
+.titulo-area p {
+    color: #666;
+    font-size: 0.95rem;
+}
+
+.highlight-name {
+    font-weight: 700;
+    color: #1d1d1d;
+}
+
+/* --- Botões de Ação do Topo --- */
+.painel-actions {
     display: flex;
+    gap: 12px;
     flex-wrap: wrap;
-    gap: 10px;
 }
 
-.btn {
-    padding: 8px 12px;
+.btn-painel {
+    padding: 10px 20px;
+    border-radius: 12px;
     text-decoration: none;
-    border-radius: 4px;
-    color: white;
-    display: inline-block;
-    text-align: center;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.08);
 }
 
-.btn-novo {
-    background-color: #28a745;
+.btn-painel:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.12);
 }
 
-.btn-logout {
+.btn-primary {
+    background-color: #ffcb45;
+    /* Amarelo Botão Padrão */
+    color: #1d1d1d;
+    border: 2px solid #ffcb45;
+}
+
+.btn-secondary {
+    background-color: #fff;
+    color: #1d1d1d;
+    border: 2px solid #eee;
+}
+
+.btn-danger {
+    background-color: #fff;
+    color: #dc3545;
+    border: 2px solid #ffecec;
+}
+
+.btn-danger:hover {
     background-color: #dc3545;
+    color: #fff;
+    border-color: #dc3545;
 }
 
-.btn-editar {
-    background-color: #ffc107;
-    color: black;
+/* --- Alertas --- */
+.alert-box {
+    background-color: #ffe6e6;
+    color: #d63031;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    border-left: 5px solid #d63031;
+    font-weight: 500;
 }
 
-.btn-deletar {
-    background-color: #dc3545;
-    color: white;
+/* --- Tabela e Lista --- */
+.lista-produtos h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #1d1d1d;
+    padding-left: 10px;
+    border-left: 4px solid #e9a209;
 }
 
-.btn-perfil {
-    background-color: #007bff;
-}
-
-.btn-loja {
-    background-color: #6c757d;
+.table-responsive {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+    overflow-x: auto;
+    /* Rolagem em telas pequenas */
+    padding: 10px;
 }
 
 table {
     width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
+    border-collapse: separate;
+    border-spacing: 0;
 }
 
-th,
-td {
-    border: 1px solid #ddd;
-    padding: 10px;
+thead th {
+    background-color: #fff9ea;
+    color: #e9a209;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    padding: 18px 15px;
     text-align: left;
+    border-bottom: 2px solid #f0f0f0;
 }
 
-th {
-    background-color: #f8f8f8;
+tbody td {
+    padding: 15px;
+    vertical-align: middle;
+    border-bottom: 1px solid #f9f9f9;
+    color: #555;
+    font-size: 0.95rem;
 }
 
-td img {
-    max-width: 60px;
-    border-radius: 4px;
+tbody tr:last-child td {
+    border-bottom: none;
 }
 
-.alert {
-    padding: 10px;
-    background: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
-    border-radius: 4px;
-    margin-bottom: 15px;
+tbody tr:hover td {
+    background-color: #fafafa;
+}
+
+/* Imagens na tabela */
+.img-wrapper {
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #f4f4f4;
+    border: 1px solid #eee;
+}
+
+.img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Colunas Específicas */
+.nome-col {
+    font-weight: 600;
+    color: #1d1d1d;
+}
+
+.preco-col {
+    color: #27ae60;
+    font-weight: 700;
+}
+
+.id-col {
+    color: #aaa;
+    font-size: 0.85rem;
+}
+
+/* Ações na Tabela */
+.actions-col {
+    white-space: nowrap;
+}
+
+.action-link {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-right: 5px;
+    transition: background 0.2s;
+}
+
+.action-link.edit {
+    background-color: #fff9ea;
+    color: #e9a209;
+}
+
+.action-link.edit:hover {
+    background-color: #ffcb45;
+    color: #1d1d1d;
+}
+
+.action-link.delete {
+    background-color: #fff5f5;
+    color: #e02b2b;
+}
+
+.action-link.delete:hover {
+    background-color: #ffe0e0;
+}
+
+/* Estado Vazio */
+.empty-state {
+    text-align: center;
+    padding: 40px;
+    color: #888;
+}
+
+.link-destaque {
+    color: #e9a209;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.link-destaque:hover {
+    text-decoration: underline;
+}
+
+/* Responsividade básica */
+@media (max-width: 768px) {
+    .painel-header {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: center;
+    }
+
+    .painel-actions {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .titulo-area {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 15px;
+    }
 }
