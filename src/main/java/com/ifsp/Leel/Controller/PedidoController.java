@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import java.util.List;
 import java.util.Map;
 
@@ -32,6 +31,7 @@ public class PedidoController {
         if (usuario instanceof Cliente) {
             return (Cliente) usuario;
         }
+
         return null;
     }
 
@@ -44,6 +44,7 @@ public class PedidoController {
 
         List<Pedido> pedidos = pedidoRepository.listarPorCliente(cliente.getId());
         model.addAttribute("pedidos", pedidos);
+
         return "meusPedidos";
     }
 
@@ -60,6 +61,7 @@ public class PedidoController {
         }
 
         model.addAttribute("pedido", pedido);
+
         return "detalhesPedido";
     }
 
@@ -115,6 +117,7 @@ public class PedidoController {
         cartService.clearCart(cartId);
 
         redirectAttributes.addFlashAttribute("sucesso", "Pedido realizado com sucesso!");
+
         return "redirect:/pedidos/meus-pedidos";
     }
 
@@ -135,6 +138,7 @@ public class PedidoController {
                 redirectAttributes.addFlashAttribute("erro", "Não é possível cancelar este pedido.");
             }
         }
+
         return "redirect:/pedidos/meus-pedidos";
     }
 }

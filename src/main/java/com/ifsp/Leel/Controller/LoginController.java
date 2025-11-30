@@ -7,12 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.ifsp.Leel.Model.Cliente;
 import com.ifsp.Leel.Model.Vendedor;
 import com.ifsp.Leel.Repository.ClienteRepository;
 import com.ifsp.Leel.Repository.VendedorRepository;
-
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -38,6 +36,7 @@ public class LoginController {
                 return "redirect:/meus-produtos";
             }
         }
+
         return "cadastroLogin.html";
     }
 
@@ -50,6 +49,7 @@ public class LoginController {
             session.setAttribute("usuarioLogado", cliente);
             session.setAttribute("tipoUsuario", "CLIENTE");
             session.setAttribute("usuarioNome", cliente.getNome());
+
             return "redirect:/loja";
         }
 
@@ -58,16 +58,19 @@ public class LoginController {
             session.setAttribute("usuarioLogado", vendedor);
             session.setAttribute("tipoUsuario", "VENDEDOR");
             session.setAttribute("usuarioNome", vendedor.getNome());
+
             return "redirect:/meus-produtos";
         }
 
         model.addAttribute("erro", "Usuário ou senha inválidos");
+
         return "cadastroLogin";
     }
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
+
         return "redirect:/login";
     }
 
@@ -79,6 +82,7 @@ public class LoginController {
             model.addAttribute("erroCadastro", "Erro ao cadastrar cliente.");
             return "cadastroLogin";
         }
+
         return "redirect:/login";
     }
 
@@ -164,6 +168,7 @@ public class LoginController {
 
         session.invalidate();
         redirectAttributes.addFlashAttribute("sucesso", "Conta deletada com sucesso.");
+
         return "redirect:/login";
     }
 }

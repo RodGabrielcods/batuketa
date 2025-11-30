@@ -85,9 +85,11 @@
                     <div class="drum" th:each="produto : ${produtos}">
                         <div class="drum-heart"><i class="fa-regular fa-heart"></i></div>
 
-                        <img th:src="@{${produto.imagem}}" alt="Imagem do Produto" class="drum-image">
+                        <a th:href="@{/produto/{id}(id=${produto.id})}" style="text-decoration: none; color: inherit;">
+                            <img th:src="@{${produto.imagem}}" alt="Imagem do Produto" class="drum-image">
 
-                        <h3 class="drum-title" th:text="${produto.nome}">Nome do Produto</h3>
+                            <h3 class="drum-title" th:text="${produto.nome}">Nome do Produto</h3>
+                        </a>
 
                         <span class="drum-description" th:text="${produto.descricao}">Descrição</span>
 
@@ -112,10 +114,8 @@
                         </div>
                     </div>
 
-
                     <div th:if="${produtos == null or produtos.isEmpty()}" style="text-align: center; width: 100%;">
                         <h3>Nenhum produto encontrado para esta categoria.</h3>
-
                         <a th:href="@{/produtos}">Limpar filtro</a>
                     </div>
                 </div>

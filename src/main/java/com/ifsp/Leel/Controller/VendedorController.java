@@ -6,10 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.ifsp.Leel.Model.Vendedor;
 import com.ifsp.Leel.Repository.VendedorRepository;
-
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -21,6 +19,7 @@ public class VendedorController {
     @GetMapping("/cadastrarVendedor")
     public String mostrarFormularioCadastroVendedor(Model model) {
         model.addAttribute("vendedor", new Vendedor());
+
         return "cadastroVendedor.html";
     }
 
@@ -35,6 +34,7 @@ public class VendedorController {
             return "cadastroVendedor";
         }
         redirectAttributes.addFlashAttribute("sucesso", "Cadastro realizado! Faça o login.");
+
         return "redirect:/login";
     }
 
@@ -44,11 +44,13 @@ public class VendedorController {
 
         Vendedor vendedorLogado = (Vendedor) session.getAttribute("usuarioLogado");
         if (vendedorLogado == null || !"VENDEDOR".equals(session.getAttribute("tipoUsuario"))) {
+
             return "redirect:/login";
         }
 
         Vendedor vendedorDB = vendedorRepository.findById((long) vendedorLogado.getId());
         if (vendedorDB == null) {
+
             return "redirect:/login";
         }
 

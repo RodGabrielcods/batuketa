@@ -31,5 +31,4 @@ public class Vendedor extends Pessoa {
         super(nome, email, senha);
         this.cnpj = cnpj;
     }
-
 }

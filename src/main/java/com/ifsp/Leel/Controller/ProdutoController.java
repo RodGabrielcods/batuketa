@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -35,6 +34,7 @@ public class ProdutoController {
         if (tipo != null && tipo.equals("VENDEDOR")) {
             return (Vendedor) session.getAttribute("usuarioLogado");
         }
+
         return null;
     }
 
@@ -48,6 +48,7 @@ public class ProdutoController {
         List<Produto> produtos = produtoRepository.listByVendedorId((long) vendedor.getId());
         model.addAttribute("produtos", produtos);
         model.addAttribute("nomeVendedor", vendedor.getNome());
+
         return "meusProdutos.html";
     }
 
@@ -57,6 +58,7 @@ public class ProdutoController {
             return "redirect:/login";
         }
         model.addAttribute("produto", new Produto());
+
         return "cadastroProduto.html";
     }
 
@@ -108,6 +110,7 @@ public class ProdutoController {
         }
 
         model.addAttribute("produto", produto);
+
         return "editarProduto.html";
     }
 
@@ -169,6 +172,7 @@ public class ProdutoController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         return "redirect:/meus-produtos";
     }
 
@@ -194,5 +198,18 @@ public class ProdutoController {
     @GetMapping("/mostrarproduto")
     public String mostrarproduto() {
         return "listaProdutos.html";
+    }
+
+    @GetMapping("/produto/{id}")
+    public String detalhesProduto(@PathVariable("id") Long id, Model model) {
+        Produto produto = produtoRepository.findById(id);
+
+        if (produto == null) {
+            return "redirect:/produtos";
+        }
+
+        model.addAttribute("produto", produto);
+
+        return "detalhesProduto.html";
     }
 }

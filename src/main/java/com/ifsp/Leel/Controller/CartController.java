@@ -12,7 +12,6 @@ import org.springframework.http.ResponseCookie;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.time.Duration;
 import java.util.*;
 
@@ -90,6 +89,7 @@ public class CartController {
             touchCartCookie(resp, id, persistent);
 
         cartService.addItem(id, sku, 1);
+
         return "redirect:/carrinho";
     }
 
@@ -100,6 +100,7 @@ public class CartController {
         if (id != null) {
             cartService.removeItem(id, sku);
         }
+
         return "redirect:/carrinho";
     }
 
@@ -119,6 +120,7 @@ public class CartController {
         String id = getCookie(req, CART_COOKIE);
         if (id != null && !id.isBlank())
             touchCartCookie(resp, id, on);
+
         return "redirect:/carrinho";
     }
 
@@ -134,6 +136,7 @@ public class CartController {
                 .path("/").maxAge(Duration.ZERO).build();
         resp.addHeader(HttpHeaders.SET_COOKIE, delCart.toString());
         resp.addHeader(HttpHeaders.SET_COOKIE, delRemember.toString());
+
         return "redirect:/carrinho";
     }
 
@@ -151,6 +154,7 @@ public class CartController {
             b.maxAge(Duration.ofDays(7));
         ResponseCookie c = b.build();
         resp.addHeader(HttpHeaders.SET_COOKIE, c.toString());
+
         return id;
     }
 
@@ -161,6 +165,7 @@ public class CartController {
             if (name.equals(c.getName()))
                 return c.getValue();
         }
+
         return null;
     }
 }
