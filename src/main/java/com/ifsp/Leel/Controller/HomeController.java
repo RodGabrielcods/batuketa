@@ -1,7 +1,6 @@
 package com.ifsp.Leel.Controller;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,17 +22,16 @@ public class HomeController {
 
     @GetMapping("/produtos")
     public String listarProdutosPublico(
-
             @RequestParam(name = "categoria", required = false) String categoria,
             Model model) {
 
         List<Produto> produtos;
 
         if (categoria != null && !categoria.isEmpty()) {
-            produtos = produtoRepository.listByCat(categoria);
+            produtos = produtoRepository.findByCategoria(categoria);
             model.addAttribute("categoriaAtiva", categoria);
         } else {
-            produtos = produtoRepository.list();
+            produtos = produtoRepository.findAll();
         }
 
         model.addAttribute("produtos", produtos);

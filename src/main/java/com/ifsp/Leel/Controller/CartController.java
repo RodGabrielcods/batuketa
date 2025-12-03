@@ -50,7 +50,7 @@ public class CartController {
             for (Map.Entry<String, Integer> entry : cartItemsRaw.entrySet()) {
                 try {
                     Long produtoId = Long.parseLong(entry.getKey());
-                    Produto produto = produtoRepository.findById(produtoId);
+                    Produto produto = produtoRepository.findById(produtoId).orElse(null);
 
                     if (produto != null) {
                         int quantidade = entry.getValue();

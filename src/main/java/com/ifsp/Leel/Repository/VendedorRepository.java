@@ -6,5 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface VendedorRepository extends JpaRepository<Vendedor, Long> {
-    Vendedor findByNomeAndSenha(String nome, String senha);
 }

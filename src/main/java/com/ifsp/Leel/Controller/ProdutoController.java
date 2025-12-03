@@ -34,7 +34,6 @@ public class ProdutoController {
         if (tipo != null && tipo.equals("VENDEDOR")) {
             return (Vendedor) session.getAttribute("usuarioLogado");
         }
-
         return null;
     }
 
@@ -45,7 +44,7 @@ public class ProdutoController {
             return "redirect:/login";
         }
 
-        List<Produto> produtos = produtoRepository.listByVendedorId((long) vendedor.getId());
+        List<Produto> produtos = produtoRepository.findByVendedorId((long) vendedor.getId());
         model.addAttribute("produtos", produtos);
         model.addAttribute("nomeVendedor", vendedor.getNome());
 
@@ -89,7 +88,7 @@ public class ProdutoController {
 
         try {
             produto.setVendedor(vendedor);
-            produtoRepository.salvar(produto);
+            produtoRepository.save(produto);
         } catch (Exception e) {
             e.printStackTrace();
             model.addAttribute("erro", "Falha ao salvar o produto no banco de dados.");
@@ -103,7 +102,7 @@ public class ProdutoController {
     @GetMapping("/produto/editar/{id}")
     public String mostrarFormularioEdicao(@PathVariable("id") Long id, Model model, HttpSession session) {
         Vendedor vendedor = getVendedorLogado(session);
-        Produto produto = produtoRepository.findById(id);
+        Produto produto = produtoRepository.findById(id).orElse(null);
 
         if (vendedor == null || produto == null || produto.getVendedor().getId() != vendedor.getId()) {
             return "redirect:/meus-produtos";
@@ -121,7 +120,7 @@ public class ProdutoController {
             Model model, HttpSession session, RedirectAttributes redirectAttributes) {
 
         Vendedor vendedor = getVendedorLogado(session);
-        Produto produtoExistente = produtoRepository.findById((long) produto.getId());
+        Produto produtoExistente = produtoRepository.findById((long) produto.getId()).orElse(null);
 
         if (vendedor == null || produtoExistente == null
                 || produtoExistente.getVendedor().getId() != vendedor.getId()) {
@@ -145,7 +144,7 @@ public class ProdutoController {
         }
 
         try {
-            produtoRepository.atualizar(produto);
+            produtoRepository.save(produto);
         } catch (Exception e) {
             e.printStackTrace();
             model.addAttribute("erro", "Falha ao atualizar o produto.");
@@ -160,7 +159,7 @@ public class ProdutoController {
     public String deletarProduto(@PathVariable("id") Long id, HttpSession session,
             RedirectAttributes redirectAttributes) {
         Vendedor vendedor = getVendedorLogado(session);
-        Produto produto = produtoRepository.findById(id);
+        Produto produto = produtoRepository.findById(id).orElse(null);
 
         if (vendedor == null || produto == null || produto.getVendedor().getId() != vendedor.getId()) {
             redirectAttributes.addFlashAttribute("erro", "Você não pode deletar este produto.");
@@ -168,7 +167,7 @@ public class ProdutoController {
         }
 
         try {
-            produtoRepository.deletar(id);
+            produtoRepository.deleteById(id);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -202,7 +201,7 @@ public class ProdutoController {
 
     @GetMapping("/produto/{id}")
     public String detalhesProduto(@PathVariable("id") Long id, Model model) {
-        Produto produto = produtoRepository.findById(id);
+        Produto produto = produtoRepository.findById(id).orElse(null);
 
         if (produto == null) {
             return "redirect:/produtos";

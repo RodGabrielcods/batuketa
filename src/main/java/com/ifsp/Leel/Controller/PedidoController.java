@@ -42,7 +42,7 @@ public class PedidoController {
             return "redirect:/login";
         }
 
-        List<Pedido> pedidos = pedidoRepository.listarPorCliente(cliente.getId());
+        List<Pedido> pedidos = pedidoRepository.findByClienteId(cliente.getId());
         model.addAttribute("pedidos", pedidos);
 
         return "meusPedidos";
@@ -54,7 +54,7 @@ public class PedidoController {
         if (cliente == null)
             return "redirect:/login";
 
-        Pedido pedido = pedidoRepository.findById(id);
+        Pedido pedido = pedidoRepository.findById(id).orElse(null);
 
         if (pedido == null || !pedido.getCliente().getId().equals(cliente.getId())) {
             return "redirect:/pedidos/meus-pedidos";
@@ -93,7 +93,7 @@ public class PedidoController {
                 Long produtoId = Long.parseLong(entry.getKey());
                 int quantidade = entry.getValue();
 
-                Produto produto = produtoRepository.findById(produtoId);
+                Produto produto = produtoRepository.findById(produtoId).orElse(null);
 
                 if (produto != null) {
                     ItemPedido item = new ItemPedido();
@@ -113,7 +113,7 @@ public class PedidoController {
             return "redirect:/carrinho";
         }
 
-        pedidoRepository.salvar(pedido);
+        pedidoRepository.save(pedido);
         cartService.clearCart(cartId);
 
         redirectAttributes.addFlashAttribute("sucesso", "Pedido realizado com sucesso!");
@@ -127,12 +127,12 @@ public class PedidoController {
         if (cliente == null)
             return "redirect:/login";
 
-        Pedido pedido = pedidoRepository.findById(id);
+        Pedido pedido = pedidoRepository.findById(id).orElse(null);
 
         if (pedido != null && pedido.getCliente().getId().equals(cliente.getId())) {
             if ("AGUARDANDO PAGAMENTO".equals(pedido.getStatus()) || "PAGO".equals(pedido.getStatus())) {
                 pedido.setStatus("CANCELADO");
-                pedidoRepository.atualizar(pedido);
+                pedidoRepository.save(pedido);
                 redirectAttributes.addFlashAttribute("sucesso", "Pedido cancelado.");
             } else {
                 redirectAttributes.addFlashAttribute("erro", "Não é possível cancelar este pedido.");
